@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls.conf import include
 from rest_framework.routers import DefaultRouter
 from django.urls import path
+from django.conf.urls import url
+from django.views.static import serve
+from django.conf import settings
 from education.views import (
     RegionViewSet,
     HouseHoldViewSet,
@@ -33,12 +36,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('v1/', include(router.urls)),
 
-]
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('v1/', include(router.urls)),
-
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
